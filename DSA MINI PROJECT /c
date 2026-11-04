@@ -1,0 +1,68 @@
+#include <stdio.h>
+
+struct Student {
+    int roll;
+    char name[20];
+    int age;
+    char branch[10];
+    char club[30];
+    float cgpa;
+    float marks10;
+    float marks12;
+};
+
+int binarySearch(struct Student s[], int n, int key) {
+    int start = 0, end = n - 1;
+
+    while (start <= end) {
+        int mid = (start + end) / 2;
+
+        if (s[mid].roll == key)
+            return mid;
+        else if (s[mid].roll < key)
+            start = mid + 1;
+        else
+            end = mid - 1;
+    }
+
+    return -1;
+}
+
+int main() {
+    struct Student s[10] = {
+        {1, "Sakshi", 19, "ENTC", "Rudra", 8.5, 85, 82},
+        {2, "Priya", 19, "CSE", "Micdrop", 8.8, 90, 88},
+        {3, "Rahul", 20, "IT", "Vajra", 7.9, 78, 80},
+        {4, "Amit", 19, "ENTC", "Robocon", 8.2, 82, 85},
+        {5, "Neha", 19, "AIDS", "Rudra", 9.1, 92, 90},
+        {6, "Rohan", 20, "CSE", "Robocon", 7.8, 80, 79},
+        {7, "Pooja", 19, "IT", "Micdrop", 8.6, 88, 86},
+        {8, "Karan", 20, "ENTC", "Vajra", 7.5, 75, 78},
+        {9, "Sneha", 19, "AIDS", "Rudra", 9.0, 91, 89},
+        {10, "Arjun", 20, "CSE", "Robocon", 8.0, 84, 81}
+    };
+
+    int key, result;
+
+    printf("STUDENT RECORD SEARCH SYSTEM\n");
+    printf("Enter Roll Number: ");
+    scanf("%d", &key);
+
+    result = binarySearch(s, 10, key);
+
+    if (result != -1) {
+        printf("\nStudent Details\n");
+        printf("Roll Number : %d\n", s[result].roll);
+        printf("Name        : %s\n", s[result].name);
+        printf("Age         : %d\n", s[result].age);
+        printf("Branch      : %s\n", s[result].branch);
+        printf("Club        : %s\n", s[result].club);
+        printf("CGPA        : %.2f\n", s[result].cgpa);
+        printf("10th Marks  : %.2f%%\n", s[result].marks10);
+        printf("12th Marks  : %.2f%%\n", s[result].marks12);
+    } else {
+        printf("\nStudent record not found!\n");
+    }
+
+    return 0;
+}
